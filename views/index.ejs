@@ -29,7 +29,15 @@
     </header>
 
     <section id="weather-info">
-      <div class="container"></div>
+      <% if (result) { %>
+      <div class="container">
+        <h2>Weather at <%- result.cityname %></h2>
+        <p>
+          <%= result.weather[0].main %> - <%= result.weather[0].description %>
+        </p>
+        <p>Temp: <%= result.main.temp %> Celcius</p>
+      </div>
+      <% } %>
     </section>
   </body>
 </html>

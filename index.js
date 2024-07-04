@@ -10,8 +10,10 @@ const API_KEY = "fe0f806894cddd1471a320bd4724da0b";
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let data;
+
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index.ejs", { result: data });
 });
 
 app.post("/search-weather", async (req, res) => {
@@ -31,8 +33,18 @@ app.post("/search-weather", async (req, res) => {
       },
     });
 
-    console.log(weather.data);
-    res.render("index.ejs");
+    data = new Object();
+    data = weather.data;
+    data.cityname = req.body.cityName;
+    data.cityname = data.cityname.toUpperCase();
+    data.main.temp = (
+      Math.round((data.main.temp - 273.15) * 100) / 100
+    ).toFixed(2);
+    console.log(data);
+    res.redirect("/");
+    // res.render("index.ejs", {
+    //   icon: weather.data.weather[0].icon,
+    // });
   } catch (error) {
     res.statusCode;
   }
