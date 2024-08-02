@@ -42,14 +42,11 @@ app.post("/search-weather", async (req, res) => {
     ).toFixed(2);
     console.log(data);
     res.redirect("/");
-    // res.render("index.ejs", {
-    //   icon: weather.data.weather[0].icon,
-    // });
   } catch (error) {
     res.statusCode;
   }
 });
 
 app.listen(port, () => {
-  console.log("Server running on port " + port);
+  console.log("Server running on port http://localhost:" + port);
 });
